@@ -1,12 +1,11 @@
 FROM eclipse-temurin:17-jdk-alpine
-
-VOLUME /tmp
-
-# Copy the JAR file
-COPY target/*.jar app.jar
-
-# Expose port
+    
 EXPOSE 8080
+ 
+ENV APP_HOME /usr/src/app
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+COPY target/*.jar $APP_HOME/app.jar
+
+WORKDIR $APP_HOME
+
+CMD ["java", "-jar", "app.jar"]
